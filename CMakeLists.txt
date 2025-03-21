@@ -136,11 +136,23 @@ endif ()
 # Dependencies
 ################################################################################
 
+
+
 # Threads
 find_package(Threads REQUIRED)
 
 # Boost
-find_package( Boost 1.55 COMPONENTS system thread filesystem REQUIRED )
+set(Boost_NO_SYSTEM_PATHS OFF)
+set(BOOST_ROOT "${HOME}/boost-1.76")
+set(BOOST_INCLUDEDIR "${BOOST_ROOT}/include")
+set(BOOST_LIBRARYDIR "${BOOST_ROOT}/lib")
+set(Boost_NO_BOOST_CMAKE ON)
+# Boost
+find_package( Boost 1.76 COMPONENTS system thread filesystem REQUIRED )
+message(STATUS "Found Boost version: ${Boost_VERSION}")
+if(NOT Boost_VERSION)
+    set(Boost_VERSION 107600)  # Default to 1.76.0 if empty
+endif()
 include_directories(SYSTEM ${Boost_INCLUDE_DIR} )
 
 if(Boost_FOUND)
