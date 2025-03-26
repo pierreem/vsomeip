@@ -141,14 +141,10 @@ endif ()
 # Threads
 find_package(Threads REQUIRED)
 
+message(STATUS "Boost_INCLUDE_DIR: ${Boost_INCLUDE_DIR}")
+message(STATUS "Boost_LIBRARY_DIR: ${Boost_LIBRARY_DIR}")
 # Boost
-set(Boost_NO_SYSTEM_PATHS OFF)
-set(BOOST_ROOT "${HOME}/boost-1.76")
-set(BOOST_INCLUDEDIR "${BOOST_ROOT}/include")
-set(BOOST_LIBRARYDIR "${BOOST_ROOT}/lib")
-set(Boost_NO_BOOST_CMAKE ON)
-# Boost
-find_package( Boost 1.76 COMPONENTS system thread filesystem REQUIRED )
+find_package(Boost 1.76 REQUIRED COMPONENTS system thread filesystem)
 message(STATUS "Found Boost version: ${Boost_VERSION}")
 if(NOT Boost_VERSION)
     set(Boost_VERSION 107600)  # Default to 1.76.0 if empty

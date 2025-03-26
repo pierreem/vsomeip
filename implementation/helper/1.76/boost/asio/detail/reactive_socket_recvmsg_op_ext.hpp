@@ -41,7 +41,7 @@ public:
   reactive_socket_recvmsg_op_base_ext(const boost::system::error_code& success_ec,
 	  socket_type socket, const MutableBufferSequence& buffers, socket_base::message_flags in_flags,
       socket_base::message_flags& out_flags, func_type complete_func)
-    : reactor_op_ext(&reactive_socket_recvmsg_op_base_ext::do_perform, complete_func),
+    : reactor_op_ext(boost::system::error_code(),&reactive_socket_recvmsg_op_base_ext::do_perform, complete_func),
       socket_(socket),
       buffers_(buffers),
       in_flags_(in_flags),
